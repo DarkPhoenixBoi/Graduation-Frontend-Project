@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  padding: 0.2rem;
+  background-color: var(--main-text-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filterButton {
+  background-color: transparent;
+  color: white;
+  padding: 5px 3px;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.filterIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.panelWrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-top: 1px solid #dddddd2e;
+}

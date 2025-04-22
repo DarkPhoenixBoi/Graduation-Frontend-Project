@@ -1,0 +1,80 @@
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+/* Hero Banner Styling */
+.heroBanner {
+  width: 100%;
+  height: 500px;
+  background-image: url("/src/assets/banner4.jpg"); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-text-color);
+  text-align: center;
+  position: relative;
+  margin-bottom: 1rem; /* Space after the hero banner */
+}
+
+.heroContent {
+  z-index: 2;
+  max-width: 800px;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.ctaButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4c1d95;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #6d28d9;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--main-text-color);
+  margin-bottom: 1rem;
+}
+.sliderWrapper {
+  background-color: #f3f4f6; /* Light grey background for the slider */
+  padding: 20px;
+  border-radius: 8px;
+  overflow: visible !important;
+}
+
+.bookCard {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookImage {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}

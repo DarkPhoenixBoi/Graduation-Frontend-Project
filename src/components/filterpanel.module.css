@@ -1,0 +1,61 @@
+.panel {
+  background-color: #f9f9fc;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-top: 1rem;
+  color: #4c1d95;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.section p {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #4c1d95;
+  font-size: 1.1rem;
+}
+
+.section label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.section input[type="checkbox"] {
+  accent-color: #7c3aed;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.multiColumn {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem 1.2rem;
+}
+
+.sortSection {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sortSelect {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,22 @@
+/* index.css */
+:root {
+  --main-bg-color: rgb(250, 250, 250);
+  --main-text-color: #3b2e4d;
+  --old-text-color: #4c1d95;
+  --main-highlight-color: #ebe8ef;
+  --old-highlight-color: #e1dae8;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: #f6f4fc;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

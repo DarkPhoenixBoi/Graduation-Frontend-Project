@@ -1,0 +1,19 @@
+.browse {
+  /* padding: 2rem; */
+  font-family: poppins, sans-serif;
+  color: #4c1d95;
+}
+.genreTitle {
+  padding: 0.5rem 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--main-text-color);
+}
+
+.bookGrid {
+  padding: 0.5rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem 0rem;
+  margin-top: 1.5rem;
+}

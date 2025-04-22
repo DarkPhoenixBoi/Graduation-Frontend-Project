@@ -1,0 +1,67 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f6f4fc;
+}
+
+.loginCard {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #4c1d95;
+  margin-bottom: 1.5rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #a78bfa;
+}
+
+.loginButton {
+  padding: 0.75rem;
+  background-color: #4c1d95;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #6d28d9;
+}
+
+.signupText {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signupText a {
+  color: #4c1d95;
+  text-decoration: none;
+  font-weight: 500;
+}
