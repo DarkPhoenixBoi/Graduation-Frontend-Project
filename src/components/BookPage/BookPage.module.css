@@ -53,12 +53,18 @@
 .availability,
 .price {
   margin-bottom: 0.1rem;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
 }
 .description {
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #4b5563;
+  white-space: pre-wrap; /* Preserve line breaks, wrap normally */
+  word-break: break-word; /* Break long words */
+  overflow-wrap: break-word; /* For better compatibility */
+  max-height: 300px; /* Optional: limit height */
+  overflow-y: auto; /* Optional: enable scroll if too long */
+  padding-right: 0.5rem; /* Add some spacing if scroll appears */
 }
 
 /* BookActions styles */
@@ -154,4 +160,21 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+/* Related Books Slider styles */
+.sliderSection {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.sliderTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--main-text-color);
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+  text-align: start;
 }

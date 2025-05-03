@@ -1,0 +1,144 @@
+.container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.bookList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bookItem {
+  cursor: pointer;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: calc(50% - 1rem);
+  background-color: #f9f9f9;
+  transition: background-color 0.2s ease;
+}
+.bookItem strong {
+  display: block;
+}
+.bookItem span {
+  display: block;
+}
+
+.bookItem:hover {
+  background-color: #f1f1f1;
+}
+
+.selected {
+  border-color: #007bff;
+  background-color: #e8f0ff;
+}
+
+.reviewCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  font-weight: bold;
+  color: #ffa500;
+}
+
+.comment {
+  margin-top: 0.5rem;
+  color: #444;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #b02a37;
+}
+.reviewSection {
+  margin-top: 2rem;
+}
+
+.reviewSection h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.reviewTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.reviewTable th,
+.reviewTable td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.reviewTable th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #444;
+}
+
+.reviewTable tr:last-child td {
+  border-bottom: none;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background-color: #b02a37;
+}

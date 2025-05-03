@@ -1,0 +1,87 @@
+.footer {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  padding: 2rem 0rem 1rem;
+  margin-top: auto;
+  font-size: 0.95rem;
+}
+.ribbon {
+  background-color: var(--main-text-color);
+  display: block;
+  padding: 0.6rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.logo {
+  height: 60px;
+  /* margin-right: 10px; */
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 2rem;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand h2 {
+  color: #4c1d95;
+  margin-bottom: 0.5rem;
+}
+
+.linksSection {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.linksSection h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.linksSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksSection li {
+  margin-bottom: 0.25rem;
+}
+
+.linksSection a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.linksSection a:hover {
+  color: #4c1d95;
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+.social a {
+  color: #4b5563;
+  transition: color 0.2s ease;
+}
+
+.social a:hover {
+  color: #4c1d95;
+}
+
+.bottomBar {
+  text-align: center;
+  margin-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+}

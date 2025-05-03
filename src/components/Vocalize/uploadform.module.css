@@ -1,0 +1,23 @@
+.uploadForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.uploadForm button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #9333ea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uploadForm button:hover {
+  background-color: #7e22ce;
+}

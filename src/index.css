@@ -5,6 +5,8 @@
   --old-text-color: #4c1d95;
   --main-highlight-color: #ebe8ef;
   --old-highlight-color: #e1dae8;
+  height: 100%;
+  margin: 0;
 }
 * {
   margin: 0;
@@ -19,4 +21,31 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+}
+
+/* PDF Reader CSS */
+/* Override link annotation style */
+.react-pdf__LinkAnnotation {
+  border-bottom: 1px dashed #007bff; /* custom link underline */
+  color: #007bff;
+  text-decoration: none;
+}
+
+.react-pdf__LinkAnnotation:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* subtle hover */
+}
+
+/* Optional: hide annotation icons/popups */
+.react-pdf__PopupAnnotation {
+  display: none;
 }

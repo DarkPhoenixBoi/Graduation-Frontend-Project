@@ -1,18 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./Navbar.module.css";
+import mainNavbarStyles from "./Navbar.module.css";
+import dashboardNavbarStyles from "./navbardashboard.module.css";
 import logo from "../assets/Logo.png";
 import cartIcon from "../assets/cart.svg";
 import userIcon from "../assets/person.svg";
+import { AuthContext } from "../context/AuthContext"; // Import AuthContext
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef();
-
   const [showGenreDropdown, setShowGenreDropdown] = useState(false);
+  const dropdownRef = useRef();
   const navigate = useNavigate();
+
+  const { user, isLoggedIn, logout } = useContext(AuthContext); // Use context
+
+  const isDashboard = user?.role?.toLowerCase() == "admin";
+  const styles = isDashboard ? dashboardNavbarStyles : mainNavbarStyles;
 
   const genres = [
     "Fiction",
@@ -27,7 +31,7 @@ function Navbar() {
     "History",
     "Philosophy",
     "Poetry",
-    "Self-Help",
+    "Crime",
     "Science",
     "Art",
     "Comics",
@@ -45,7 +49,7 @@ function Navbar() {
     "Technology",
     "Politics",
     "Travel",
-  ]; //Temporary genres
+  ];
 
   const handleGenreSelect = (genre) => {
     setShowGenreDropdown(false);
@@ -76,7 +80,6 @@ function Navbar() {
           onMouseEnter={() => setShowGenreDropdown(true)}
           onMouseLeave={() => setShowGenreDropdown(false)}
         >
-          {/* <span className={styles.browseDropdownToggle}>Browse ▾</span> */}
           <Link to="/browse" className={styles.browseDropdownToggle}>
             Browse ▾
           </Link>
@@ -100,15 +103,14 @@ function Navbar() {
         <Link to="/vocalize">Vocalize</Link>
         <Link to="/library">Library</Link>
       </div>
+
       <div className={styles.navbarUser}>
-        {/* Cart Icon */}
         <div className={styles.cartIcon}>
           <Link to="/cart">
             <img src={cartIcon} alt="Cart" />
           </Link>
         </div>
 
-        {/* User Icon with Dropdown */}
         {isLoggedIn ? (
           <div className={styles.userDropdown} ref={dropdownRef}>
             <img
@@ -122,7 +124,7 @@ function Navbar() {
             >
               <Link to="/profile">Profile</Link>
               <Link to="/settings">Settings</Link>
-              <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+              <button onClick={logout}>Logout</button>
             </div>
           </div>
         ) : (

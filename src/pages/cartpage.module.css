@@ -1,0 +1,60 @@
+.cartWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.cartItemTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.cartItemActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.removeButton {
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background: darkred;
+}
+
+.totalPrice {
+  margin-top: 2rem;
+  text-align: right;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.checkoutButton {
+  margin-top: 1rem;
+  float: right;
+  background: seagreen;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.checkoutButton:hover {
+  background: mediumseagreen;
+}

@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import BookItem from "../components/BookItem";
+import api from "../api/axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 function Home() {
-  const featuredBooks = [
-    { title: "Book 1", author: "Author 1", image: "/src/assets/Title1.png" },
-    { title: "Book 2", author: "Author 2", image: "/src/assets/Title2.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 3", author: "Author 3", image: "/src/assets/Title3.png" },
-    { title: "Book 1", author: "Author 1", image: "/src/assets/Title1.png" },
-    { title: "Book 2", author: "Author 2", image: "/src/assets/Title2.png" },
-  ];
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const baseURL = "http://127.0.0.1:8000";
+
+  useEffect(() => {
+    api
+      .get(`/api/books`)
+      .then((res) => {
+        setBooks(res.data.books || res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching books:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className={styles.home}>
@@ -41,32 +46,29 @@ function Home() {
       <section className={styles.section}>
         <div className={styles.sliderWrapper}>
           <h2 className={styles.sectionTitle}>Featured Books</h2>
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={10} // Lower this if there's too much space
-            navigation={true}
-            modules={[Navigation]}
-            breakpoints={{
-              375: {
-                slidesPerView: 1, // On smaller screens, show 1 book per row
-              },
-              560: {
-                slidesPerView: 2, // 2 per row on medium screens
-              },
-              820: {
-                slidesPerView: 3, // 3 per row on larger screens
-              },
-              1070: {
-                slidesPerView: 4, // 3 per row on larger screens
-              },
-            }}
-          >
-            {featuredBooks.map((book, index) => (
-              <SwiperSlide key={index}>
-                <BookItem key={index} book={book} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+
+          {loading ? (
+            <p>Loading books...</p>
+          ) : (
+            <Swiper
+              slidesPerView={3}
+              spaceBetween={10}
+              navigation={true}
+              modules={[Navigation]}
+              breakpoints={{
+                375: { slidesPerView: 1 },
+                560: { slidesPerView: 2 },
+                820: { slidesPerView: 3 },
+                1070: { slidesPerView: 4 },
+              }}
+            >
+              {books.map((book, index) => (
+                <SwiperSlide key={index}>
+                  <BookItem book={book} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </section>
     </div>

@@ -3,12 +3,17 @@ import styles from "./BookPage.module.css";
 import { Play, Pause, Volume2 } from "lucide-react";
 
 function AudiobookPlayer({ audiobook }) {
-  const { fileURL: audioSrc, duration } = audiobook || {};
+  const { file_url: audioSrc } = audiobook || {};
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState("00:00");
   const [volume, setVolume] = useState(1);
+
+  const baseUrl = "http://localhost:8000";
+  const audioUrl = audioSrc?.startsWith("http")
+    ? audioSrc
+    : `${baseUrl}/storage/${audioSrc}`;
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -57,7 +62,7 @@ function AudiobookPlayer({ audiobook }) {
 
   return (
     <div className={styles.audioPlayer}>
-      <audio ref={audioRef} src={audioSrc} preload="metadata" />
+      <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
       <div className={styles.controls}>
         <button onClick={togglePlay} className={styles.playButton}>
@@ -72,10 +77,6 @@ function AudiobookPlayer({ audiobook }) {
           onChange={handleSeek}
           className={styles.progressBar}
         />
-
-        <span className={styles.time}>
-          {currentTime} / {duration}
-        </span>
 
         <div className={styles.volumeControl}>
           <Volume2 size={18} />

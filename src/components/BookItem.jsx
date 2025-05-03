@@ -6,10 +6,17 @@ import styles from "./BookItem.module.css";
 function BookItem({ book }) {
   const { title, author, image, price } = book;
   const [hovered, setHovered] = useState(false);
+
+  const baserUrl = "http://127.0.0.1:8000";
+
+  const imageUrl = image?.startsWith("http")
+    ? image
+    : `${baserUrl}/storage/${image}`;
+
   const navigate = useNavigate();
   const handleClick = () => {
-    // navigate(`book/${book.id}`); // Actual route
-    navigate("/browse/book"); // Temporary route for testing
+    navigate(`/browse/book/${book.id}`); // Actual route
+    // navigate("/browse/book"); // Temporary route for testing
   };
   return (
     <div
@@ -18,10 +25,10 @@ function BookItem({ book }) {
       onMouseLeave={() => setHovered(false)}
       onClick={handleClick}
     >
-      <img src={image} alt={title} className={styles.bookCover} />
+      <img src={imageUrl} alt={title} className={styles.bookCover} />
       <h3 className={styles.bookTitle}>{title}</h3>
       <p className={styles.bookAuthor}>{author}</p>
-      <p className={styles.bookPrice}>{price}</p>
+      <p className={styles.bookPrice}>{price ? `$${price}` : "Free"}</p>
 
       <div
         className={`${styles.previewBox} ${hovered ? styles.previewBoxVisible : ""}`}

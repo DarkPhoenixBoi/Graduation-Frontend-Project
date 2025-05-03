@@ -1,0 +1,11 @@
+.processingStatus {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.processingStatus .error {
+  color: red;
+  font-weight: bold;
+}

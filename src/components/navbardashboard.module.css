@@ -1,0 +1,166 @@
+/* Dark Theme Navbar for Dashboard */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2rem 3rem;
+  background-color: #333; /* Dark background */
+  color: #e5e7eb; /* Light text */
+  font-family: poppins, sans-serif;
+  /* box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); */
+}
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.navbarLogo span {
+  font-size: 1.2rem;
+}
+
+.navbarLinks {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.browseDropdownToggle,
+.navbarLinks a {
+  color: #e5e7eb; /* Light text for links */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem; /* Bigger text */
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.navbarLinks a:hover {
+  background-color: #7c3aed; /* Highlight color on hover */
+}
+
+.navbarUser {
+  display: flex;
+  align-items: center;
+}
+
+.navbarUser a {
+  color: #e5e7eb; /* Light text for user */
+  text-decoration: none;
+}
+
+.cartIcon,
+.userIcon {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.cartIcon {
+  margin-right: 1.5rem;
+}
+
+/* User Dropdown */
+.userDropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: #444; /* Darker background for dropdown */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.dropdownMenu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdownMenu a,
+.dropdownMenu button {
+  padding: 0.7rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-weight: 500;
+  color: #e5e7eb; /* Light text in dropdown */
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.dropdownMenu a:hover,
+.dropdownMenu button:hover {
+  background-color: #7c3aed; /* Highlight on hover */
+}
+
+/* Browse Dropdown Menu */
+.browseDropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.browseDropdownToggle {
+  color: #e5e7eb; /* Light text */
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.browseDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #444; /* Darker background */
+  color: #e5e7eb; /* Light text for menu */
+  border: 1px solid #ddd;
+  padding: 1rem;
+  max-width: 500px;
+  z-index: 10;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.genreDescription {
+  font-size: 0.875rem;
+  color: #bbb; /* Light gray color for text */
+  margin-bottom: 1rem;
+}
+
+.genreGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
+  max-width: 500px;
+}
+
+.browseDropdownItem {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.browseDropdownItem:hover {
+  background-color: #7c3aed; /* Highlight color on hover */
+}

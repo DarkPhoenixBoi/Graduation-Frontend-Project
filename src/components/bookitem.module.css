@@ -1,4 +1,7 @@
 .bookCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make sure card fills height for grid or parent */
   background-color: white;
   border: 1px solid #ddd;
   padding: 1rem;
@@ -19,7 +22,8 @@
 
 .bookCover {
   width: 100%;
-  height: auto;
+  max-height: 200px; /* or 250px depending on design */
+  object-fit: cover; /* ensures image fills space without distortion */
   border-radius: 4px;
 }
 
@@ -35,6 +39,7 @@
 }
 .bookPrice {
   font-size: 1rem;
+  margin-top: auto;
   color: var(--main-text-color);
 }
 

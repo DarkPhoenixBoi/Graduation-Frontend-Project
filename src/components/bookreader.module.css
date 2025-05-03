@@ -1,0 +1,70 @@
+.readerOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Contained Book Reader Box */
+.readerBox {
+  background: white;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Toolbar remains on top */
+.toolbar {
+  padding: 0.75rem 1rem;
+  background: #f8f8f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Scrollable PDF area */
+.readerContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+/* Controls layout */
+.navigation,
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navigation span {
+  white-space: nowrap;
+}
+
+/* Shared button styles */
+.navigation button,
+.zoomControls button,
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}

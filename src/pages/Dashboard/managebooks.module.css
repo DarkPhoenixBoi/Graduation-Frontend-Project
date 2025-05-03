@@ -1,0 +1,127 @@
+.container {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.addButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+.bookTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bookTable th,
+.bookTable td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.bookTable th {
+  background-color: #f4f4f4;
+}
+
+.bookTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.bookTable td button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.bookTable td button:hover {
+  background-color: #2196f3;
+  color: white;
+}
+
+.deleteBtn {
+  background-color: #f44336;
+}
+
+.deleteBtn:hover {
+  background-color: #e53935;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.bookForm {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookForm h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.bookForm input,
+.bookForm select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.bookForm button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.bookForm button:hover {
+  background-color: #45a049;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.formActions button:last-child {
+  background-color: #f44336;
+}
+
+.formActions button:last-child:hover {
+  background-color: #e53935;
+}

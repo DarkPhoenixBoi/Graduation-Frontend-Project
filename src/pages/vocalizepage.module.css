@@ -1,0 +1,43 @@
+.vocalizePage {
+  background: linear-gradient(to bottom right, #f3e8ff, #ede9fe);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.vocalizeContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vocalizeTitle {
+  font-size: 2.5rem;
+  color: #6b21a8;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.vocalizeCard {
+  background-color: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(107, 33, 168, 0.1);
+  margin-bottom: 2rem;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.vocalizeCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(107, 33, 168, 0.15);
+}
+
+.vocalizePlayer {
+  background-color: #ede9fe;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(107, 33, 168, 0.15);
+}
