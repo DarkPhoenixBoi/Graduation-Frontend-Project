@@ -1,17 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import baseURL from "../config";
 import styles from "./BookItem.module.css";
 
 function BookItem({ book }) {
   const { title, author, image, price } = book;
   const [hovered, setHovered] = useState(false);
 
-  const baserUrl = "http://127.0.0.1:8000";
-
   const imageUrl = image?.startsWith("http")
     ? image
-    : `${baserUrl}/storage/${image}`;
+    : `${baseURL}/storage/${image}`;
 
   const navigate = useNavigate();
   const handleClick = () => {

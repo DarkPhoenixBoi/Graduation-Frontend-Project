@@ -7,14 +7,15 @@ import RelatedBooksSlider from "../components/BookPage/RelatedBooksSlider";
 import ReviewList from "../components/Review/ReviewList";
 
 import styles from "../components/BookPage/BookPage.module.css";
+import Loading from "../components/Loading";
+
+import baseURL from "../config";
 
 function BookPage() {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const baseUrl = "http://localhost:8000"; // or use from .env
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -41,7 +42,7 @@ function BookPage() {
     // TODO: redirect to audiobook player or download
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (!book) return <div>Book not found.</div>;
 
   return (

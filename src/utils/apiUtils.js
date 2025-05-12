@@ -5,13 +5,13 @@ const RETRY_DELAY_MS = 1000;
 
 export const convertTextToAudio = async (
   textChunk,
-  retries = 0,
-  block_cheat = true //delete after testing
+  language = "en",
+  retries = 0
 ) => {
   try {
     const response = await axios.post(
       "http://localhost:8001/synthesize/",
-      { text: textChunk, block_cheat: block_cheat },
+      { text: textChunk, language }, // Send language here
       { responseType: "blob" }
     );
     return response.data;
@@ -19,10 +19,10 @@ export const convertTextToAudio = async (
     if (retries < MAX_RETRIES) {
       console.warn(`Retrying chunk (${retries + 1}/${MAX_RETRIES})...`);
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
-      return convertTextToAudio(textChunk, retries + 1);
+      return convertTextToAudio(textChunk, language, retries + 1);
     } else {
       console.error("Skipping chunk after 3 failed attempts:", error);
-      return null; // Skips failed chunk
+      return null;
     }
   }
 };

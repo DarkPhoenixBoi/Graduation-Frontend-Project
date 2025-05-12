@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
 import styles from "./ManageBooks.module.css";
 
+import baseURL from "../../config";
+
 const ManageBooks = () => {
   const [books, setBooks] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -20,8 +22,6 @@ const ManageBooks = () => {
     image: null,
     audiobook_file: null,
   });
-
-  const baseUrl = "http://127.0.0.1:8000";
 
   const fetchBooks = () => {
     api.get(`/api/books`).then((res) => setBooks(res.data));
@@ -50,6 +50,8 @@ const ManageBooks = () => {
     data.append("published_date", formData.published_date);
     if (formData.file) data.append("file", formData.file);
     if (formData.image) data.append("image", formData.image);
+    if (formData.audio_sample)
+      data.append("audio_sample", formData.audio_sample);
     if (editBook) data.append("_method", "PUT");
 
     try {
@@ -139,7 +141,7 @@ const ManageBooks = () => {
       image: null, // 👈 Clear out the string path
       audiobook_file: null,
     });
-    setImagePreview(`${baseUrl}/storage/${book.image}`);
+    setImagePreview(`${baseURL}/storage/${book.image}`);
     setShowForm(true);
     fetchBooks();
   };
@@ -168,7 +170,7 @@ const ManageBooks = () => {
               <td>
                 {book.image && (
                   <img
-                    src={`${baseUrl}/storage/${book.image}`}
+                    src={`${baseURL}/storage/${book.image}`}
                     alt={book.title}
                     style={{
                       width: "60px",
@@ -185,7 +187,12 @@ const ManageBooks = () => {
               <td>{book.availability}</td>
               <td>{book.published_date}</td>
               <td>
-                <button onClick={() => openEdit(book)}>Edit</button>
+                <button
+                  onClick={() => openEdit(book)}
+                  className={styles.editBtn}
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => handleDelete(book.id)}
                   className={styles.deleteBtn}
@@ -255,55 +262,81 @@ const ManageBooks = () => {
               onChange={handleInputChange}
               required
             />
-            <input
-              name="file"
-              type="file"
-              accept=".pdf,.epub"
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, file: e.target.files[0] }))
-              }
-              required={!editBook}
-            />
-            <input
-              name="audiobook"
-              type="file"
-              accept="audio/*"
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  audiobook_file: e.target.files[0],
-                }))
-              }
-            />
-            <input
-              name="image"
-              type="file"
-              accept=".jpg,.jpeg,.png"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (file) {
-                  setFormData((prev) => ({ ...prev, image: file }));
-                  setImagePreview(URL.createObjectURL(file));
+            <div className={styles.formSection}>
+              <label htmlFor="file">Book File (PDF/EPUB):</label>
+              <input
+                id="file"
+                name="file"
+                type="file"
+                accept=".pdf,.epub"
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, file: e.target.files[0] }))
                 }
-              }}
-            />
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Preview"
-                style={{
-                  width: "150px",
-                  marginTop: "10px",
-                  borderRadius: "8px",
+                required={!editBook}
+              />
+
+              <label htmlFor="audiobook">Full Audiobook:</label>
+              <input
+                id="audiobook"
+                name="audiobook"
+                type="file"
+                accept="audio/*"
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    audiobook_file: e.target.files[0],
+                  }))
+                }
+              />
+
+              <label htmlFor="audio_sample">Audio Sample:</label>
+              <input
+                id="audio_sample"
+                name="audio_sample"
+                type="file"
+                accept="audio/*"
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    audio_sample: e.target.files[0],
+                  }))
+                }
+              />
+
+              <label htmlFor="image">Cover Image (JPG/PNG):</label>
+              <input
+                id="image"
+                name="image"
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setFormData((prev) => ({ ...prev, image: file }));
+                    setImagePreview(URL.createObjectURL(file));
+                  }
                 }}
               />
-            )}
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className={styles.imagePreview}
+                />
+              )}
+            </div>
+
             <div className={styles.formActions}>
-              <button type="submit" disabled={loading}>
+              <button
+                type="submit"
+                className={styles.saveBtn}
+                disabled={loading}
+              >
                 {loading ? "Saving..." : "Save"}
               </button>
               <button
                 type="button"
+                className={styles.cancelBtn}
                 onClick={() => {
                   setImagePreview(null);
                   setShowForm(false);

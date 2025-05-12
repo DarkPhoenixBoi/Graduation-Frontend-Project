@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Footer.module.css";
 import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 import logo from "../assets/logo.png";
+import logoIcon from "../assets/vocalize-logo.png";
 
 function Footer() {
   return (

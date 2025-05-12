@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import BookItem from "../components/BookItem";
+import Loading from "../components/Loading";
 import api from "../api/axios";
+import publicApi from "../api/publicApi";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import baseURL from "../config";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 
 function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const baseURL = "http://127.0.0.1:8000";
-
   useEffect(() => {
-    api
+    publicApi
       .get(`/api/books`)
       .then((res) => {
         setBooks(res.data.books || res.data);
@@ -48,7 +51,7 @@ function Home() {
           <h2 className={styles.sectionTitle}>Featured Books</h2>
 
           {loading ? (
-            <p>Loading books...</p>
+            <Loading />
           ) : (
             <Swiper
               slidesPerView={3}

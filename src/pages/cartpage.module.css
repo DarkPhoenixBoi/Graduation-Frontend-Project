@@ -1,7 +1,18 @@
 .cartWrapper {
-  max-width: 800px;
+  max-width: 900px; /* Increased max width for a better layout */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2.5rem;
+  background-color: #f9f9f9; /* Subtle background color */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+}
+
+.cartWrapper h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .cartItem {
@@ -9,12 +20,22 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.cartItem:hover {
+  background-color: #f1f1f1; /* Hover effect for item */
 }
 
 .cartItemTitle {
   font-size: 1.1rem;
   font-weight: 500;
+  color: #444;
+  max-width: 70%; /* Restrict title width to prevent overflow */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .cartItemActions {
@@ -30,9 +51,15 @@
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.removeButton:hover {
+.removeButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.removeButton:hover:not(:disabled) {
   background: darkred;
 }
 
@@ -41,20 +68,42 @@
   text-align: right;
   font-size: 1.4rem;
   font-weight: bold;
+  color: #333;
 }
 
 .checkoutButton {
   margin-top: 1rem;
-  float: right;
+  display: block;
+  width: 100%;
   background: seagreen;
   color: white;
   border: none;
   padding: 0.7rem 1.2rem;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.checkoutButton:hover {
+.checkoutButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.checkoutButton:hover:not(:disabled) {
   background: mediumseagreen;
+}
+
+/* Add spacing and structure for when cart is empty */
+.cartWrapper p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Ensure the cart items list has some margin/padding */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 2rem;
 }

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
 import styles from "./AssignTags.module.css";
 
+import baseURL from "../../config";
+
 const AssignTags = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [allTags, setAllTags] = useState([]);
   const [bookTags, setBookTags] = useState([]);
-
-  const baseUrl = "http://127.0.0.1:8000";
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     api.get(`/api/books`).then((res) => setBooks(res.data));
@@ -27,11 +28,13 @@ const AssignTags = () => {
     const bookId = selectedBook.id;
 
     try {
-      console.log("Tags to update ", bookTags);
       await api.post(`/api/books/${bookId}/tags`, {
         tag_ids: bookTags,
       });
-      alert("Tags updated successfully");
+      setSuccessMessage("Tags updated successfully");
+
+      // Clear the message after 3 seconds
+      setTimeout(() => setSuccessMessage(""), 3000);
     } catch (err) {
       console.error("Failed to update tags", err);
     }
@@ -95,6 +98,9 @@ const AssignTags = () => {
           <button onClick={saveTags} className={styles.saveButton}>
             Save Tags
           </button>
+          {successMessage && (
+            <div className={styles.successMessage}>{successMessage}</div>
+          )}
         </div>
       )}
     </div>

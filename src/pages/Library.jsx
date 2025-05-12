@@ -2,14 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import api from "../api/axios";
 import { AuthContext } from "../context/AuthContext"; // Import AuthContext
+import { useLibrary } from "../context/LibraryContext";
+
+import baseURL from "../config";
+
 import BookReader from "../components/BookReader"; // Assuming you have a BookReader component
+import AudioPlayerSimple from "../components/AudioPlayerSimple";
+import Loading from "../components/Loading";
 import styles from "./Library.module.css";
 import reviewIcon from "../assets/review-icon2.svg";
-import dummyFile from "../assets/The Adventures of Sherlock Holmes.pdf";
 
 function Library() {
-  const [library, setLibrary] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { library, loading, fetchLibrary } = useLibrary();
 
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -21,26 +25,11 @@ function Library() {
   const [isReaderOpen, setIsReaderOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const [currentAudiobook, setCurrentAudiobook] = useState(null);
+
   const { user } = useContext(AuthContext); // Use context
 
-  const baseUrl = "http://localhost:8000";
   const userId = user?.id;
-
-  useEffect(() => {
-    async function fetchLibrary() {
-      try {
-        const response = await api.get(`/api/library`);
-        setLibrary(response.data);
-        console.log("Library data:", response.data);
-      } catch (error) {
-        console.error("Failed to fetch library", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchLibrary();
-  }, []);
 
   const openReviewModal = (book, review = null) => {
     setSelectedBook(book);
@@ -79,8 +68,8 @@ function Library() {
       };
 
       const url = existingReview
-        ? `${baseUrl}/api/reviews/${existingReview.id}`
-        : `${baseUrl}/api/reviews`;
+        ? `${baseURL}/api/reviews/${existingReview.id}`
+        : `${baseURL}/api/reviews`;
 
       const method = existingReview ? "patch" : "post";
 
@@ -95,7 +84,7 @@ function Library() {
 
       console.log("Review submitted successfully:", response.data);
 
-      // After submitting, you may want to refresh the library to reflect updated review
+      await fetchLibrary();
       closeReviewModal();
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -108,7 +97,7 @@ function Library() {
     const [type, fileName] = fileUrl.split("/");
 
     // Construct the URL to fetch the file from the new API route
-    const fileDownloadUrl = `${baseUrl}/api/files/${type}/${fileName}`;
+    const fileDownloadUrl = `${baseURL}/api/files/${type}/${fileName}`;
 
     setSelectedFile(fileDownloadUrl);
     setIsReaderOpen(true);
@@ -120,10 +109,19 @@ function Library() {
   };
 
   const playAudiobook = (audiobook) => {
-    console.log("playing audiobook");
+    const [type, fileName] = audiobook.file_url.split("/");
+    const fileDownloadUrl = `${baseURL}/api/files/${type}/${fileName}`;
+
+    setCurrentAudiobook({
+      url: fileDownloadUrl,
+      title: audiobook.book_title || "Audiobook",
+      image: audiobook.book_image
+        ? `${baseURL}/storage/${audiobook.book_image}`
+        : "",
+    });
   };
 
-  if (loading) return <p>Loading your library...</p>;
+  if (loading) return <Loading />;
 
   return (
     <div className={styles.libraryWrapper}>
@@ -136,7 +134,7 @@ function Library() {
           return (
             <div key={book.id} className={styles.libraryItem}>
               <img
-                src={`${baseUrl}/storage/${book.image}`}
+                src={`${baseURL}/storage/${book.image}`}
                 alt={book.title}
                 className={styles.bookImage}
               />
@@ -163,15 +161,21 @@ function Library() {
                     className={styles.actionButton}
                     onClick={() => openReader(book.file_url)}
                   >
-                    📖 Read
+                    Read
                   </button>
                 )}
                 {book.audiobook && book.audiobook.file_url && (
                   <button
                     className={styles.actionButton}
-                    onClick={() => playAudiobook(book.audiobook)}
+                    onClick={() =>
+                      playAudiobook({
+                        file_url: book.audiobook.file_url,
+                        book_title: book.title,
+                        book_image: book.image,
+                      })
+                    }
                   >
-                    🎧 Listen
+                    Listen
                   </button>
                 )}
               </div>
@@ -225,6 +229,13 @@ function Library() {
       )}
       {isReaderOpen && selectedFile && (
         <BookReader fileUrl={selectedFile} onClose={closeReader} />
+      )}
+      {currentAudiobook && (
+        <AudioPlayerSimple
+          audiobookUrl={currentAudiobook.url}
+          title={currentAudiobook.title}
+          image={currentAudiobook.image}
+        />
       )}
     </div>
   );

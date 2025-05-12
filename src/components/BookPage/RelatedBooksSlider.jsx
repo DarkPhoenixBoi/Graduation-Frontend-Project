@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import api from "../../api/axios";
 
+import baseURL from "../../config";
+
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -11,7 +13,6 @@ import styles from "./BookPage.module.css";
 
 function RelatedBooksSlider({ genre, currentBookId }) {
   const [relatedBooks, setRelatedBooks] = useState([]);
-  const baseUrl = "http://localhost:8000"; // Adjust based on your API base URL
 
   useEffect(() => {
     const fetchRelated = async () => {

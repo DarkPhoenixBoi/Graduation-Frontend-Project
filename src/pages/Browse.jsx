@@ -5,9 +5,13 @@ import FilterBar from "../components/FilterBar";
 import styles from "./browse.module.css"; // Create this CSS module
 import { useLocation } from "react-router-dom";
 import api from "../api/axios";
+import publicApi from "../api/publicApi";
 
 //temp
 import tempAudiobook from "../assets/tempAudiobook.wav";
+import Loading from "../components/Loading";
+
+import baseURL from "../config";
 
 function Browse() {
   const [books, setBooks] = useState([]);
@@ -16,6 +20,7 @@ function Browse() {
   const genre = paramsTest.get("genre");
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
+  const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     genres: [
       "Fiction",
@@ -107,8 +112,6 @@ function Browse() {
     params.append("sort", sortOption);
   }
 
-  const baseUrl = "http://127.0.0.1:8000";
-
   const apiUrl = useMemo(() => {
     const params = new URLSearchParams();
     if (searchValue) params.append("search", searchValue);
@@ -130,17 +133,21 @@ function Browse() {
 
   useEffect(() => {
     const fetchBooks = async () => {
+      setLoading(true);
+
       try {
-        const response = await api.get(`${apiUrl}`);
-        setBooks(response.data.books || response.data); // Assuming your response data has a `books` key
-        console.log("Fetched books:", response.data.books); // Log the fetched books for debugging
+        const response = await publicApi.get(`${apiUrl}`);
+        setBooks(response.data.books || response.data);
+        console.log("Fetched books:", response.data.books);
       } catch (error) {
         console.error("Error fetching books:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchBooks();
-  }, [apiUrl]); // Adding `apiUrl` as a dependency to refetch when it's updated
+  }, [apiUrl]);
 
   const handleFilterChange = (type, value) => {
     navigate("/browse", { replace: true });
@@ -171,13 +178,18 @@ function Browse() {
         sortOptions={sortOptions}
         onSortChange={handleSortChange}
       />
-
-      <h1 className={styles.genreTitle}>{genre}</h1>
-      <div className={styles.bookGrid}>
-        {books.map((book) => (
-          <BookItem key={book.id} book={book} />
-        ))}
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <h1 className={styles.genreTitle}>{genre}</h1>
+          <div className={styles.bookGrid}>
+            {books.map((book) => (
+              <BookItem key={book.id} book={book} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

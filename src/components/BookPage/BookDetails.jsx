@@ -2,12 +2,12 @@ import React from "react";
 import BookActions from "./BookActions";
 import AudiobookPlayer from "./AudiobookPlayer";
 import styles from "./BookPage.module.css";
+import baseURL from "../../config";
 
 function BookDetails({ book, handleAccessAudiobook }) {
-  const baseUrl = "http://localhost:8000";
   const imageUrl = book.image?.startsWith("http")
     ? book.image
-    : `${baseUrl}/storage/${book.image}`;
+    : `${baseURL}/storage/${book.image}`;
 
   return (
     <div className={styles.bookDetails}>
@@ -33,7 +33,7 @@ function BookDetails({ book, handleAccessAudiobook }) {
           <strong>{book.price ? `$${book.price}` : "Free"}</strong>
         </p>
         <p className={styles.description}>{book.description}</p>
-        {book.audiobook && <AudiobookPlayer audiobook={book.audiobook} />}
+        {book.audiobook && <AudiobookPlayer audiobook={book.audio_sample} />}
       </div>
     </div>
   );

@@ -1,19 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
 import styles from "./BookPage.module.css";
 import { Play, Pause, Volume2 } from "lucide-react";
+import baseURL from "../../config";
 
 function AudiobookPlayer({ audiobook }) {
-  const { file_url: audioSrc } = audiobook || {};
+  const audioSrc = audiobook || null;
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState("00:00");
   const [volume, setVolume] = useState(1);
 
-  const baseUrl = "http://localhost:8000";
   const audioUrl = audioSrc?.startsWith("http")
     ? audioSrc
-    : `${baseUrl}/storage/${audioSrc}`;
+    : `${baseURL}/storage/${audioSrc}`;
 
   const togglePlay = () => {
     const audio = audioRef.current;

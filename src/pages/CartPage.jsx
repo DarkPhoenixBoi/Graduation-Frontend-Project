@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useLibrary } from "../context/LibraryContext";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+
+import baseURL from "../config";
 
 import styles from "./CartPage.module.css"; // Assuming you have a CSS module for styles
 
@@ -15,11 +18,10 @@ function formatPrice(amount) {
 function CartPage() {
   const { cartItems, setCartItems, removeFromCart } = useCart();
   const [removingId, setRemovingId] = useState(null); // 👈 to track which item is being removed
+  const { fetchLibrary } = useLibrary();
 
   const [checkingOut, setCheckingOut] = useState(false);
   const navigate = useNavigate(); // To redirect after checkout
-
-  const baseUrl = "http://localhost:8000"; // or use from .env
 
   const totalPrice = Array.isArray(cartItems)
     ? cartItems.reduce((sum, item) => sum + (Number(item?.book?.price) || 0), 0)
@@ -47,6 +49,7 @@ function CartPage() {
           type: item?.book?.availability?.toLowerCase(), // or "rent" if renting
         });
         await removeFromCart(item.id);
+        await fetchLibrary();
       }
       // After successful checkout
       setCartItems([]); // Clear cart
@@ -54,7 +57,7 @@ function CartPage() {
       navigate("/checkout-success"); // Redirect to success page (optional)
     } catch (error) {
       console.error("Checkout failed:", error);
-      // Optionally show an error message
+      console.log(error.response.data);
     } finally {
       setCheckingOut(false);
     }

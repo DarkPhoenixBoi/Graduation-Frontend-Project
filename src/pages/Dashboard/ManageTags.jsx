@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
 import styles from "./ManageTags.module.css";
 
+import baseURL from "../../config";
+
 const ManageTags = () => {
   const [tags, setTags] = useState([]);
   const [tagName, setTagName] = useState("");
   const [editingTag, setEditingTag] = useState(null);
-
-  const baseUrl = "http://127.0.0.1:8000";
 
   useEffect(() => {
     fetchTags();

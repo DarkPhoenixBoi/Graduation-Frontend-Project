@@ -3,7 +3,7 @@ import axios from "axios";
 import UploadForm from "../components/Vocalize/UploadForm";
 import ProcessingStatus from "../components/Vocalize/ProcessingStatus";
 import AudioPlayer from "../components/Vocalize/AudioPlayer";
-import PageSelector from "../components/Vocalize/PageSelector";
+import StartOptions from "../components/Vocalize/StartOptions";
 import { extractTextFromFile } from "../utils/fileUtils";
 import { splitTextIntoChunks } from "../utils/audioUtils";
 import { convertTextToAudio } from "../utils/apiUtils";
@@ -20,6 +20,8 @@ const VocalizePage = () => {
   const [allTextChunks, setAllTextChunks] = useState([]); // Holds all text chunks for retrying
   const [chunkStatusList, setChunkStatusList] = useState([]); // "success" | "error"
   const [retrying, setRetrying] = useState(false);
+  const [language, setLanguage] = useState("en"); // default to English
+  const [languageChosen, setLanguageChosen] = useState(false);
   const streamingRef = useRef(false);
   const cancelRef = useRef(false);
   const retryingRef = useRef(false);
@@ -39,7 +41,11 @@ const VocalizePage = () => {
       check();
     });
   }
-  const processFileChunks = async (uploadedFile, startPage = 1) => {
+  const processFileChunks = async (
+    uploadedFile,
+    startPage = 1,
+    chosenLanguage = "en"
+  ) => {
     setStatus("chunking");
     cancelStreaming();
     requestIdRef.current += 1;
@@ -76,7 +82,8 @@ const VocalizePage = () => {
         setTextChunks((prev) => [...prev, chunk]);
 
         try {
-          const audioBlob = await convertTextToAudio(chunk);
+          console.log("language:", chosenLanguage);
+          const audioBlob = await convertTextToAudio(chunk, chosenLanguage);
           setStatus("streaming");
 
           if (cancelRef.current || requestIdRef.current !== currentRequestId) {
@@ -179,7 +186,7 @@ const VocalizePage = () => {
         });
 
         try {
-          const audioBlob = await convertTextToAudio(chunk);
+          const audioBlob = await convertTextToAudio(chunk, language);
 
           // Discard stale results
           if (cancelRef.current || requestIdRef.current !== currentRequestId) {
@@ -290,10 +297,12 @@ const VocalizePage = () => {
 
         {status === "choose_start" && (
           <div className={styles.vocalizeCard}>
-            <PageSelector
-              onSelect={(page) => {
+            <StartOptions
+              onStart={(page, lang) => {
                 setStartingPage(page);
-                processFileChunks(file, page);
+                setLanguage(lang);
+                setLanguageChosen(true);
+                processFileChunks(file, page, lang);
               }}
             />
           </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/axios";
 
+import baseURL from "../config";
+
 import styles from "./Signup.module.css";
 
 function Signup() {
@@ -15,8 +17,6 @@ function Signup() {
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState(null);
   const [success, setSuccess] = useState(false);
-
-  const baseUrl = "http://127.0.0.1:8000";
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

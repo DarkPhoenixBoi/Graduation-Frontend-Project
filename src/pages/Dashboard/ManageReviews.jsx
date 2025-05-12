@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import api from "../../api/axios";
 import styles from "./ManageReviews.module.css";
 
+import baseURL from "../../config";
+
 const ManageReviews = () => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const [reviews, setReviews] = useState([]);
-
-  const baseUrl = "http://127.0.0.1:8000";
 
   useEffect(() => {
     api.get(`/api/books`).then((res) => setBooks(res.data));

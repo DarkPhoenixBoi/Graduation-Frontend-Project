@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { AuthContext } from "../context/AuthContext"; // Import AuthContext
 
+import baseURL from "../config";
+
 import styles from "./Login.module.css";
 
 function Login() {
@@ -18,8 +20,6 @@ function Login() {
   const [success, setSuccess] = useState(false);
 
   const { login } = useContext(AuthContext); // Use context
-
-  const baseUrl = "http://127.0.0.1:8000";
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));

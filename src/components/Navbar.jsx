@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import mainNavbarStyles from "./Navbar.module.css";
 import dashboardNavbarStyles from "./navbardashboard.module.css";
 import logo from "../assets/Logo.png";
+import logoIcon from "../assets/vocalize-logo.png";
 import cartIcon from "../assets/cart.svg";
 import userIcon from "../assets/person.svg";
 import { AuthContext } from "../context/AuthContext"; // Import AuthContext
+import baseURL from "../config";
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,8 +18,12 @@ function Navbar() {
   const { user, isLoggedIn, logout } = useContext(AuthContext); // Use context
 
   const isDashboard = user?.role?.toLowerCase() == "admin";
-  const styles = isDashboard ? dashboardNavbarStyles : mainNavbarStyles;
-
+  // const styles = isDashboard ? dashboardNavbarStyles : mainNavbarStyles;
+  const styles = mainNavbarStyles;
+  const profileImageUrl = user?.profile_picture
+    ? `${baseURL}/storage/${user.profile_picture}`
+    : userIcon;
+  console.log("Profile Image URL:", profileImageUrl);
   const genres = [
     "Fiction",
     "Non-fiction",
@@ -55,7 +61,9 @@ function Navbar() {
     setShowGenreDropdown(false);
     navigate(`/browse?genre=${encodeURIComponent(genre)}`);
   };
-
+  useEffect(() => {
+    console.log("Profile Picture URL:", user?.profile_picture_url); // Log the URL
+  }, [user]);
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -69,6 +77,9 @@ function Navbar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbarLogo}>
+        {/* <Link to="/">
+          <img src={logoIcon} alt="Logo" className={styles.logo} />
+        </Link> */}
         <Link to="/">
           <img src={logo} alt="Logo" className={styles.logo} />
         </Link>
@@ -114,7 +125,7 @@ function Navbar() {
         {isLoggedIn ? (
           <div className={styles.userDropdown} ref={dropdownRef}>
             <img
-              src={userIcon}
+              src={user?.profile_picture ? `${profileImageUrl}` : userIcon}
               alt="User"
               className={styles.userIcon}
               onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -123,7 +134,7 @@ function Navbar() {
               className={`${styles.dropdownMenu} ${isDropdownOpen ? styles.show : ""}`}
             >
               <Link to="/profile">Profile</Link>
-              <Link to="/settings">Settings</Link>
+              {/* <Link to="/settings">Settings</Link> */}
               <button onClick={logout}>Logout</button>
             </div>
           </div>

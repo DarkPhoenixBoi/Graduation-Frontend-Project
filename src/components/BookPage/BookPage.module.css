@@ -178,3 +178,16 @@
   margin-bottom: 1rem;
   text-align: start;
 }
+.inLibrary {
+  background-color: #999;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: default;
+}
+
+.addToLibrary {
+  background-color: royalblue;
+  color: white;
+}

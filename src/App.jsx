@@ -22,6 +22,7 @@ import ManageReviews from "./pages/Dashboard/ManageReviews";
 
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import { LibraryProvider } from "./context/LibraryContext";
 
 import CartPage from "./pages/CartPage";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
@@ -33,50 +34,52 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <CartProvider>
-          <div className="pageWrapper">
-            <Navbar isDashboard />
-            <main className="mainContent">
-              <Routes>
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/unauthorized" element={<Unauthorized />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/browse" element={<Browse />} />
+        <LibraryProvider>
+          <CartProvider>
+            <div className="pageWrapper">
+              <Navbar />
+              <main className="mainContent">
+                <Routes>
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/unauthorized" element={<Unauthorized />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/browse" element={<Browse />} />
 
-                {/* User-only pages */}
-                <Route
-                  element={<RequireAuth allowedRoles={["user", "admin"]} />}
-                >
-                  <Route path="/browse/book/:id" element={<BookPage />} />
-                  <Route path="/vocalize" element={<VocalizePage />} />
-                  <Route path="/library" element={<Library />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/cart" element={<CartPage />} />
+                  {/* User-only pages */}
                   <Route
-                    path="/checkout-success"
-                    element={<CheckoutSuccess />}
-                  />
-                </Route>
-
-                {/* Admin-only pages */}
-                <Route element={<RequireAuth allowedRoles={["admin"]} />}>
-                  {/* Dashboard Routes */}
-                  <Route path="/dashboard" element={<DashboardLayout />}>
-                    <Route path="books" element={<ManageBooks />} />
-                    <Route path="tags" element={<ManageTags />} />
-                    <Route path="assign-tags" element={<AssignTags />} />
-                    <Route path="reviews" element={<ManageReviews />} />
+                    element={<RequireAuth allowedRoles={["user", "admin"]} />}
+                  >
+                    <Route path="/browse/book/:id" element={<BookPage />} />
+                    <Route path="/vocalize" element={<VocalizePage />} />
+                    <Route path="/library" element={<Library />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/cart" element={<CartPage />} />
+                    <Route
+                      path="/checkout-success"
+                      element={<CheckoutSuccess />}
+                    />
                   </Route>
-                </Route>
-                <Route path="/*" element={<Home />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </CartProvider>
+
+                  {/* Admin-only pages */}
+                  <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+                    {/* Dashboard Routes */}
+                    <Route path="/dashboard" element={<DashboardLayout />}>
+                      <Route path="books" element={<ManageBooks />} />
+                      <Route path="tags" element={<ManageTags />} />
+                      <Route path="assign-tags" element={<AssignTags />} />
+                      <Route path="reviews" element={<ManageReviews />} />
+                    </Route>
+                  </Route>
+                  <Route path="/*" element={<Home />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </CartProvider>
+        </LibraryProvider>
       </AuthProvider>
     </>
   );
